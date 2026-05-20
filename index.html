@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraWall | Premium Wallpapers Platform</title>
+    
+    <!-- Meta tags for premium SEO -->
+    <meta name="description" content="Discover, upload, and download stunning high-resolution 4K and HD wallpapers. AuraWall offers advanced dynamic cropping, color search, and a curated aesthetic interface.">
+    <meta name="keywords" content="wallpapers, 4k wallpaper, download wallpaper, upload wallpaper, anime wallpaper, desktop background, phone wallpaper">
+    <meta name="author" content="AuraWall Corp">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Local Stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- --- Frosted Header Navigation --- -->
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="logo" id="logo-brand">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AuraWall</span>
+            </div>
+            
+            <nav class="nav-links">
+                <button class="nav-btn active" id="nav-explore">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Explore</span>
+                </button>
+                <button class="nav-btn" id="nav-favorites">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </button>
+                <button class="nav-btn" id="nav-my-uploads">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                    <span>My Uploads</span>
+                </button>
+                <a href="./admin.html" class="nav-btn" id="nav-admin" title="Admin Dashboard">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Admin</span>
+                </a>
+            </nav>
+            
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                
+                <!-- Open Upload Modal Button -->
+                <button class="action-btn" id="btn-open-upload">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Upload</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- --- Hero Search Section --- -->
+        <section class="hero-section" id="hero-banner">
+            <!-- Dynamic ambient background representing active/trending wallpaper -->
+            <div class="hero-ambient-bg" id="hero-ambient-bg"></div>
+            
+            <div class="container hero-content">
+                <span class="hero-badge">Curated Visual Sanctuaries</span>
+                <h1 class="hero-title">Elevate Your Screen with <span>AuraWall</span></h1>
+                <p class="hero-subtitle">Explore, download, and customize premium wallpapers. Cropped and formatted in-browser for your exact devices.</p>
+                
+                <!-- Search Bar Container -->
+                <div class="search-bar-wrapper">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Search high-res wallpapers by title, tags, or creator..." autocomplete="off">
+                        <button class="search-clear-btn" id="search-clear" title="Clear Search">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <button class="search-bar-btn" id="search-btn">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Search</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quick Search Tags -->
+                <div class="trending-tags">
+                    <span class="tag-label"><i class="fa-solid fa-fire"></i> Trending:</span>
+                    <button class="tag-bubble" data-tag="Anime">#Anime</button>
+                    <button class="tag-bubble" data-tag="Landscape">#Landscape</button>
+                    <button class="tag-bubble" data-tag="Stars">#Stars</button>
+                    <button class="tag-bubble" data-tag="Cyberpunk">#Cyberpunk</button>
+                    <button class="tag-bubble" data-tag="Japan">#Japan</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- Sticky Filter Toolbar Section --- -->
+        <section class="filter-toolbar" id="sticky-filters">
+            <div class="container filter-container">
+                <!-- Categories Scroller -->
+                <div class="categories-wrapper">
+                    <div class="categories-scroll" id="categories-list">
+                        <button class="category-chip active" data-category="all">
+                            <i class="fa-solid fa-globe"></i> All Wallpapers
+                        </button>
+                        <button class="category-chip" data-category="Anime">
+                            <i class="fa-solid fa-user-astronaut"></i> Anime
+                        </button>
+                        <button class="category-chip" data-category="Landscape">
+                            <i class="fa-solid fa-mountain-sun"></i> Landscape
+                        </button>
+                        <button class="category-chip" data-category="Cyberpunk">
+                            <i class="fa-solid fa-city"></i> Cyberpunk
+                        </button>
+                        <button class="category-chip" data-category="Nature">
+                            <i class="fa-solid fa-leaf"></i> Nature
+                        </button>
+                        <button class="category-chip" data-category="Fantasy">
+                            <i class="fa-solid fa-dragon"></i> Fantasy
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Controls Row (Aspect, Resolution, Sort) -->
+                <div class="controls-row">
+                    <div class="filter-group-left">
+                        <!-- Orientation Filter (Landscape/Portrait) -->
+                        <div class="filter-pill-selector" id="orientation-selector">
+                            <button class="pill-btn active" data-orientation="all">All Ratios</button>
+                            <button class="pill-btn" data-orientation="landscape">
+                                <i class="fa-solid fa-laptop"></i> Landscape
+                            </button>
+                            <button class="pill-btn" data-orientation="portrait">
+                                <i class="fa-solid fa-mobile-screen-button"></i> Portrait
+                            </button>
+                        </div>
+                        
+                        <!-- Minimum Resolution Filter -->
+                        <div class="select-wrapper">
+                            <i class="fa-solid fa-expand"></i>
+                            <select id="resolution-select" aria-label="Filter by Resolution">
+                                <option value="all">Any Resolution</option>
+                                <option value="4k">4K Ultra HD+ (3840+)</option>
+                                <option value="1080p">Full HD+ (1920+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Sorting Select -->
+                    <div class="select-wrapper">
+                        <i class="fa-solid fa-arrow-down-wide-short"></i>
+                        <select id="sort-select" aria-label="Sort Wallpapers">
+                            <option value="newest">Sort by: Newest</option>
+                            <option value="likes">Sort by: Most Liked</option>
+                            <option value="downloads">Sort by: Most Downloaded</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- Wallpaper Gallery Grid Section --- -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-stats-header">
+                    <div class="gallery-title" id="gallery-current-title">Explore Wallpapers</div>
+                    <div class="gallery-count" id="gallery-count-text">Showing 5 wallpapers</div>
+                </div>
+                
+                <!-- Main dynamic wallpapers grid -->
+                <div class="wallpapers-grid" id="wallpapers-grid">
+                    <!-- Wallpapers will be injected here via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- --- Wallpaper Detail Modal --- -->
+    <div class="modal-overlay" id="details-modal">
+        <div class="modal-container">
+            <button class="modal-close-btn" id="btn-close-details" title="Close Preview">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="details-layout">
+                <!-- Left Preview Column -->
+                <div class="details-preview-panel">
+                    <div class="details-preview-wrapper" id="details-image-container" title="Click to zoom fullscreen">
+                        <img src="" id="details-img" alt="Wallpaper Preview">
+                    </div>
+                </div>
+                
+                <!-- Right Info and Download Column -->
+                <div class="details-info-panel">
+                    <div class="details-header">
+                        <span class="details-category" id="details-category">Landscape</span>
+                        <h2 class="details-title" id="details-title">Scenic Fuji Mountains</h2>
+                        <div class="details-author" id="details-author-box">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&fit=crop" alt="Creator Avatar">
+                            <span>Uploaded by <strong id="details-creator">AuraUser</strong></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Grid -->
+                    <div class="details-stats-row">
+                        <div class="stat-box">
+                            <div class="stat-label">Views</div>
+                            <div class="stat-value" id="details-views">2.4K</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Downloads</div>
+                            <div class="stat-value" id="details-downloads">840</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Likes</div>
+                            <div class="stat-value" id="details-likes">120</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Image dimensions -->
+                    <div class="details-metadata-list">
+                        <div class="metadata-item">
+                            <span class="metadata-name">Original Resolution</span>
+                            <span class="metadata-value" id="details-res-value">3840 x 2160</span>
+                        </div>
+                        <div class="metadata-item">
+                            <span class="metadata-name">Orientation</span>
+                            <span class="metadata-value" id="details-orientation-value">Landscape (16:9)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Dominant Color Swatches (Extracted dynamically!) -->
+                    <div class="palette-block">
+                        <div class="palette-title"><i class="fa-solid fa-palette"></i> Color Swatches</div>
+                        <div class="palette-swatches" id="details-colors-palette">
+                            <!-- Color Swatches will be injected here dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Tags -->
+                    <div class="details-tags">
+                        <div class="details-tags-title"><i class="fa-solid fa-tags"></i> Tags</div>
+                        <div class="details-tags-list" id="details-tags-list">
+                            <!-- Tags will be injected here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Actions (Like and Crop-Download Button) -->
+                    <div class="details-actions">
+                        <button class="details-like-btn" id="btn-like-detail" title="Add to Favorites">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                        
+                        <div class="download-split-btn">
+                            <button class="download-main-action" id="btn-download-main">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <span>Download Original</span>
+                            </button>
+                            <button class="download-dropdown-action" id="btn-download-dropdown" title="Select Resolution & Ratio">
+                                <i class="fa-solid fa-caret-up"></i>
+                                
+                                <!-- Custom Crop/Resolution selector menu -->
+                                <div class="download-resolutions-menu" id="download-menu">
+                                    <button class="download-menu-item" data-resolution="original">
+                                        <span class="download-menu-item-title">Original Quality</span>
+                                        <span class="download-menu-item-desc" id="menu-original-desc">Raw image resolution</span>
+                                    </button>
+                                    <button class="download-menu-item" data-resolution="4k">
+                                        <span class="download-menu-item-title">4K Ultra HD</span>
+                                        <span class="download-menu-item-desc">3840 x 2160 (16:9 Landscape)</span>
+                                    </button>
+                                    <button class="download-menu-item" data-resolution="1080p">
+                                        <span class="download-menu-item-title">1080p Desktop</span>
+                                        <span class="download-menu-item-desc">1920 x 1080 (16:9 Landscape)</span>
+                                    </button>
+                                    <button class="download-menu-item" data-resolution="mobile">
+                                        <span class="download-menu-item-title">Mobile Phone Screen</span>
+                                        <span class="download-menu-item-desc">1080 x 2400 (9:20 Portrait Crop)</span>
+                                    </button>
+                                    <button class="download-menu-item" data-resolution="square">
+                                        <span class="download-menu-item-title">Square Crop</span>
+                                        <span class="download-menu-item-desc">1080 x 1080 (1:1 Aspect Ratio)</span>
+                                    </button>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- Large full-screen zoom overlay --- -->
+    <div class="zoomed-overlay" id="zoomed-overlay">
+        <img src="" id="zoomed-img" alt="Zoomed View">
+    </div>
+
+    <!-- --- Drag and Drop Upload Modal --- -->
+    <div class="modal-overlay" id="upload-modal">
+        <div class="modal-container" style="max-width: 820px;">
+            <button class="modal-close-btn" id="btn-close-upload" title="Close Uploader">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="upload-layout">
+                <h2 class="upload-title">Share Your Visual Craft</h2>
+                <p class="upload-subtitle">Upload high-resolution wallpaper files to AuraWall. JPG, PNG, and WebP are supported.</p>
+                
+                <form id="upload-form">
+                    <div class="upload-grid">
+                        <!-- Left: File Drop Zone -->
+                        <div class="upload-dropzone-container">
+                            <input type="file" id="upload-file-input" accept="image/*" style="display: none;">
+                            <div class="dropzone" id="dropzone">
+                                <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                                <span class="dropzone-text">Drag & drop your wallpaper here</span>
+                                <span class="dropzone-subtext">or click to browse local files</span>
+                                
+                                <!-- File Upload Image Preview -->
+                                <div class="drop-preview" id="drop-preview">
+                                    <img src="" id="drop-preview-img" alt="Uploaded Preview">
+                                    <button type="button" class="drop-preview-remove" id="btn-remove-preview" title="Remove Image">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Detected Image Dimensions Metadata -->
+                            <div class="upload-res-box" id="upload-res-box">
+                                <span class="upload-res-label">Detected Specs</span>
+                                <span class="upload-res-value" id="upload-res-value">
+                                    <i class="fa-solid fa-circle-check"></i> 3840 x 2160 (4K - 16:9)
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Metadata Fields -->
+                        <div class="upload-form-panel">
+                            <!-- Title Input -->
+                            <div class="input-field-group">
+                                <label class="input-label" for="upload-title-input">Wallpaper Title</label>
+                                <input type="text" class="input-control" id="upload-title-input" placeholder="e.g. Neon Streets of Shinjuku" required>
+                            </div>
+                            
+                            <!-- Category Select -->
+                            <div class="input-field-group">
+                                <label class="input-label" for="upload-category-input">Category</label>
+                                <select class="input-control" id="upload-category-input" required>
+                                    <option value="" disabled selected>Select wallpaper category</option>
+                                    <option value="Anime">Anime</option>
+                                    <option value="Landscape">Landscape</option>
+                                    <option value="Cyberpunk">Cyberpunk</option>
+                                    <option value="Nature">Nature</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Minimalist">Minimalist</option>
+                                    <option value="Sci-Fi">Sci-Fi</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Creator Input -->
+                            <div class="input-field-group">
+                                <label class="input-label" for="upload-creator-input">Creator Credit</label>
+                                <input type="text" class="input-control" id="upload-creator-input" placeholder="e.g. Jane Doe (or leave empty for Anonymous)">
+                            </div>
+                            
+                            <!-- Tags Input -->
+                            <div class="input-field-group">
+                                <label class="input-label" for="upload-tags-input">Tags (separated by commas)</label>
+                                <input type="text" class="input-control" id="upload-tags-input" placeholder="e.g. neon, city, japan, night, rain">
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <button type="submit" class="upload-submit-btn" id="upload-submit-btn" disabled>
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>Upload to Gallery</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- Toast Notifications System Container --- -->
+    <div id="toast-container"></div>
+
+    <!-- --- Footer --- -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AuraWall</span>
+            </div>
+            <p class="footer-text">© 2026 AuraWall. A premium visual sanctuary for desktop and mobile design. High-fidelity in-browser scaling powered by HTML5 Canvas.</p>
+            <div class="footer-socials">
+                <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="footer-social-btn" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                <a href="#" class="footer-social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Canvas drawing utility used for dynamic cropping in the background -->
+    <canvas id="hidden-crop-canvas" style="display: none;"></canvas>
+
+    <!-- --- Core Application Engine JS --- -->
+    <script src="./app.js"></script>
+</body>
+</html>
